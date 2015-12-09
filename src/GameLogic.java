@@ -53,7 +53,7 @@ public class GameLogic {
 	public void logicUpdate() {
 		if (isOver == true) {
 			// player.drawDead();
-			return;
+			//return;
 		}
 		createMonster();
 		

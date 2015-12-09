@@ -7,6 +7,7 @@ import com.sun.glass.events.KeyEvent;
 public class Player implements IRenderable {
 	private int x, y;
 	private int direction;
+	private int soulCount;
 	private int hp;
 	private int score;
 	private boolean isDead;
@@ -36,6 +37,15 @@ public class Player implements IRenderable {
 		isDead = false;
 		score = 0;
 		cooldown[0]=cooldown[1]=cooldown[2]=0;
+		soulCount = 0;
+	}
+
+	public int getSoulCount() {
+		return soulCount;
+	}
+
+	public void setSoulCount(int soulCount) {
+		this.soulCount = soulCount;
 	}
 
 	public boolean isDead() {
@@ -127,5 +137,9 @@ public class Player implements IRenderable {
 		g2.setColor(Color.RED);
 		g2.fillRect(x, y - 90 + 40, 40, 90);
 
+	}
+	public boolean isRequiemReady(){
+		if(soulCount>=10) return true;
+		return false;
 	}
 }

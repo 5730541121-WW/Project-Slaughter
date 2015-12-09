@@ -23,10 +23,11 @@ public class Main {
 			try {
 				Thread.sleep(50);
 			}catch(InterruptedException e){}
-			if(logic.isOver())return;
+			//if(logic.isOver())return;
 			logic.logicUpdate();
 			f.repaint();
-			north.score.setText(""+GameLogic.getPlayer().getScore());
+			north.score.setText("SCORE : "+GameLogic.getPlayer().getScore());
+			//north.score.setHorizontalAlignment(SwingConstants.LEFT);
 			InputUtility.postUpdate();
 		}
 	}
