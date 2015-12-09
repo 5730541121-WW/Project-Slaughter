@@ -1,31 +1,26 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-public class Monster {
+public class Monster implements IRenderable{
 	private int x,y;
 	private int direction;
 	private int hp;
 	private boolean isDead;
-	private String word;
 	private int speed;
-	public Monster(String word){
-		x = (int)(Math.random());
-		if( x < 0.5 ){
+	public Monster(){
+		x = (int)((Math.random())*2);
+		if( x < 1 ){
 			x = 0;
 			direction = -1;
 		}
 		else {
-			x = 1024;
+			x = 1100;
 			direction = 1;
 		}
-		y = 360;
+		y = 300;
 		isDead = false;
-		this.word = word;
-		speed = (int)((Math.random())*5+2);
-	}
-	public String getWord() {
-		return word;
-	}
-	public void setWord(String word) {
-		this.word = word;
+		speed = (int)((Math.random())*15+2);
 	}
 	public int getX() {
 		return x;
@@ -64,7 +59,21 @@ public class Monster {
 			x-=speed;
 	}
 	public void hit(){
-		GameLogic.getPlayer().decreaseLife();
+		//GameLogic.getPlayer().decreaseLife();
+		GameLogic.getPlayer().increaseScore();
 		isDead = true;
+	}
+	@Override
+	public void draw(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(Color.BLUE);
+		g2.fillOval(x-20, y, 40, 40);	
+		
+	}
+	public boolean isInSamePosition( IRenderable e ){
+		if(e.getX() == x) return true;
+		if(e.getX()>x && e.getX()<x+40) return true;
+		if(x>e.getX() && x< e.getX()+40) return true;
+		return false;
 	}
 }
