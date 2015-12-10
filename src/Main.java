@@ -27,6 +27,7 @@ public class Main {
 			logic.logicUpdate();
 			f.repaint();
 			north.score.setText("SCORE : "+GameLogic.getPlayer().getScore());
+			north.soul.setText("SOUL : "+GameLogic.getPlayer().getSoulCount());
 			//north.score.setHorizontalAlignment(SwingConstants.LEFT);
 			InputUtility.postUpdate();
 		}

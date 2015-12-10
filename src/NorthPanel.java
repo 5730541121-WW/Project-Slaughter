@@ -1,33 +1,41 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
 public class NorthPanel extends JPanel{
 	GameLogic logic;
 	public static JLabel score = new JLabel();
+	public static JLabel soul = new JLabel();
 	public NorthPanel(){
-		setPreferredSize(new Dimension(1024, 100));
-		setLayout(new FlowLayout(FlowLayout.LEFT));
+		setPreferredSize(new Dimension(1400, 100));
+		setLayout(new BorderLayout());
 		score.setText("Score : 0");
-		score.setHorizontalAlignment(SwingConstants.LEFT);
 		score.setFont(new Font("Tahoma", Font.BOLD, 30));
+		soul.setText("Soul : 0");	
+		soul.setFont(new Font("Tahoma", Font.BOLD, 30));		
 		setBackground(Color.BLACK);
 		score.setForeground(Color.WHITE);
-		add(score);
+		soul.setForeground(Color.WHITE);
+		add(score,BorderLayout.WEST);		
+		add(soul,BorderLayout.EAST);
+		
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.RED);
-		int k = 450;
+		int k = 0;
 		for(int i=0;i<GameLogic.getPlayer().getHp();i++){
-			g2d.fillRect(k, 5, 30,30);
-			k+=50;
+			BufferedImage image = ResourceUtility.getHeart();
+			g2d.drawImage(image, null, k+700-125, 15);
+			k+=70;
 		}
 	}
 }

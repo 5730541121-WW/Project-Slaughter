@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import com.sun.glass.events.KeyEvent;
 
@@ -8,9 +9,22 @@ public class Player implements IRenderable {
 	private int x, y;
 	private int direction;
 	private int soulCount;
+	private boolean isRequiemUnleashing;
+	private int RequiemStage;
+	private int requiemTickCount;
 	private int hp;
 	private int score;
-	private boolean isDead;
+	private int razeTick;
+	private boolean isDead, isRazing;
+
+	public boolean isRazing() {
+		return isRazing;
+	}
+
+	public void setRazing(boolean isRazing) {
+		this.isRazing = isRazing;
+	}
+
 	private int[] cooldown = new int[4];
 
 	public int getScore() {
@@ -31,13 +45,18 @@ public class Player implements IRenderable {
 
 	public Player() {
 		direction = -1;
-		x = 500;
-		y = 300;
+		x = 700;
+		y = 240;
 		hp = 3;
 		isDead = false;
 		score = 0;
-		cooldown[0]=cooldown[1]=cooldown[2]=0;
+		cooldown[0] = cooldown[1] = cooldown[2] = 0;
 		soulCount = 0;
+		isRequiemUnleashing = false;
+		RequiemStage = 1;
+		requiemTickCount = 0;
+		isRazing = false;
+		razeTick = 0;
 	}
 
 	public int getSoulCount() {
@@ -102,44 +121,111 @@ public class Player implements IRenderable {
 	}
 
 	public void update() {
-		if (InputUtility.getKeyTriggered(KeyEvent.VK_C) && cooldown[2] == 0) {
-			GameLogic.getRazes().add(new Raze(400, direction));
-			cooldown[2]=60;
+		if (isRequiemReady() && InputUtility.getKeyTriggered(KeyEvent.VK_R)) {
+			isRequiemUnleashing = true;
+			soulCount = 0;
+		} else if (isRequiemUnleashing) {
+			soulCount = 0;
+			if (requiemTickCount == 3 && (RequiemStage * 50 + x <= 1400 || x - RequiemStage * 50 >= 0)) {
+				GameLogic.getRazes().add(new Requiem(RequiemStage * 50, 1));
+				GameLogic.getRazes().add(new Requiem(RequiemStage * 50, -1));
+				requiemTickCount = 0;
+				RequiemStage++;
+			} else if (RequiemStage * 50 + x > 1400 && x - RequiemStage * 50 < 0) {
+				isRequiemUnleashing = false;
+				RequiemStage = 1;
+			} else
+				requiemTickCount++;
+		} else if (InputUtility.getKeyTriggered(KeyEvent.VK_C) && cooldown[2] == 0) {
+			GameLogic.getRazes().add(new Raze(600, direction));
+			isRazing = true;
+			razeTick = 7;
+			cooldown[2] = 60;
 		} else if (InputUtility.getKeyTriggered(KeyEvent.VK_X) && cooldown[1] == 0) {
-			GameLogic.getRazes().add(new Raze(250, direction));
-			cooldown[1]=60;
+			GameLogic.getRazes().add(new Raze(400, direction));
+			isRazing = true;
+			razeTick =7;
+			cooldown[1] = 60;
 		} else if (InputUtility.getKeyTriggered(KeyEvent.VK_Z) && cooldown[0] == 0) {
-			GameLogic.getRazes().add(new Raze(100, direction) );
-			cooldown[0]=60;
+			GameLogic.getRazes().add(new Raze(200, direction));
+			isRazing = true;
+			razeTick = 7;
+			cooldown[0] = 60;
 		}
-		else if (InputUtility.getKeyPressed(KeyEvent.VK_RIGHT)) {
-			x += 10;
+		if (InputUtility.getKeyPressed(KeyEvent.VK_RIGHT) && !isRazing) {
+			x += 15;
 			direction = 1;
-			if (x >= 1024 - 30)
-				x = 1024 - 30;
-		} else if (InputUtility.getKeyPressed(KeyEvent.VK_LEFT)) {
-			x -= 10;
+			if (x >= 1400)
+				x = 1400;
+		}
+		if (InputUtility.getKeyPressed(KeyEvent.VK_LEFT) && !isRazing) {
+			x -= 15;
 			direction = -1;
 			if (x <= 0)
 				x = 0;
-		} 
-		for(int i=0;i<3;i++){
-			if(cooldown[i]>0){
-				cooldown[i]-=1;
-				//System.out.println(cooldown[i]);
+		}
+		if (razeTick > 0)
+			razeTick--;
+		else
+			isRazing = false;
+		for (int i = 0; i < 3; i++) {
+			if (cooldown[i] > 0) {
+				cooldown[i] -= 1;
+				// System.out.println(cooldown[i]);
 			}
 		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.RED);
-		g2.fillRect(x, y - 90 + 40, 40, 90);
-
+		Graphics2D g2d = (Graphics2D) g;
+		if (isRazing) {
+			if (razeTick > 3) {
+				if (direction == 1) {
+					BufferedImage image = ResourceUtility.getRr1();
+					g2d.drawImage(image, null, x - 140, y);
+				} else {
+					BufferedImage image = ResourceUtility.getRl1();
+					g2d.drawImage(image, null, x - 140, y);
+				}
+			}
+			else {
+				if (direction == 1) {
+					BufferedImage image = ResourceUtility.getRr2();
+					g2d.drawImage(image, null, x - 140, y);
+				} else {
+					BufferedImage image = ResourceUtility.getRl2();
+					g2d.drawImage(image, null, x - 140, y);
+				}
+			}
+			return;
+		}
+		if (GameLogic.getTick() % 6 < 3) {
+			if (direction == 1) {
+				BufferedImage image = ResourceUtility.getNr1();
+				g2d.drawImage(image, null, x - 140, y);
+			} else {
+				BufferedImage image = ResourceUtility.getNl1();
+				g2d.drawImage(image, null, x - 140, y);
+			}
+		} else {
+			if (direction == 1) {
+				BufferedImage image = ResourceUtility.getNr2();
+				g2d.drawImage(image, null, x - 140, y);
+			} else {
+				BufferedImage image = ResourceUtility.getNl2();
+				g2d.drawImage(image, null, x - 140, y);
+			}
+		}
 	}
-	public boolean isRequiemReady(){
-		if(soulCount>=10) return true;
+
+	public boolean isRequiemReady() {
+		if (soulCount >= 10)
+			return true;
 		return false;
+	}
+
+	public void increaseSoul() {
+		soulCount++;
 	}
 }

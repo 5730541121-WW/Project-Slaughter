@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Monster implements IRenderable{
 	private int x,y;
@@ -12,15 +13,15 @@ public class Monster implements IRenderable{
 		x = (int)((Math.random())*2);
 		if( x < 1 ){
 			x = 0;
-			direction = -1;
-		}
-		else {
-			x = 1100;
 			direction = 1;
 		}
-		y = 300;
+		else {
+			x = 1400;
+			direction = -1;
+		}
+		y = 335;
 		isDead = false;
-		speed = (int)((Math.random())*15+2);
+		speed = (int)((Math.random())*5+5);
 	}
 	public int getX() {
 		return x;
@@ -53,27 +54,39 @@ public class Monster implements IRenderable{
 		this.isDead = isDead;
 	}
 	public void update(){
-		if( direction == -1 )
+		if( direction == 1 )
 			x+=speed;
 		else
 			x-=speed;
 	}
 	public void hit(){
-		//GameLogic.getPlayer().decreaseLife();
+		GameLogic.getPlayer().increaseSoul();
 		GameLogic.getPlayer().increaseScore();
 		isDead = true;
 	}
 	@Override
 	public void draw(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.BLUE);
-		g2.fillOval(x-20, y, 40, 40);	
+		if(direction == 1){
+			BufferedImage image = ResourceUtility.getCreepL((GameLogic.getTick()%14)/2);
+			g2.drawImage(image, null, x-60, y);
+		}
+		else {
+			BufferedImage image = ResourceUtility.getCreepR((GameLogic.getTick()%14)/2);
+			g2.drawImage(image, null, x-60, y);
+		}
 		
 	}
 	public boolean isInSamePosition( IRenderable e ){
 		if(e.getX() == x) return true;
-		if(e.getX()>x && e.getX()<x+40) return true;
-		if(x>e.getX() && x< e.getX()+40) return true;
+		if(e.getX()>x && e.getX()-30<=x) return true;
+		if(e.getX()<x && e.getX()+30>=x) return true;
+		return false;
+	}
+	public boolean isRazeHit( Raze e ){
+		if(e.getX() == x) return true;
+		if(e.getX()>x && e.getX()-35<=x) return true;
+		if(e.getX()<x && e.getX()+35>=x) return true;
 		return false;
 	}
 }

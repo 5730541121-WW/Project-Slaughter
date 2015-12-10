@@ -4,8 +4,16 @@ public class GameLogic {
 	private static ArrayList<Monster> monsters = new ArrayList<>();
 	private static ArrayList<Raze> razes = new ArrayList<>();
 	private static Player player = new Player();
-	private int tick;
+	private static int tick;
 	private int stage;
+	public static int getTick() {
+		return tick;
+	}
+
+	public static void setTick(int tick) {
+		GameLogic.tick = tick;
+	}
+
 	private static boolean isOver;
 
 	public ArrayList<Monster> getMonsters() {
@@ -33,10 +41,10 @@ public class GameLogic {
 	}
 
 	private int monsterCount;
-	private int creationDelay = 10;
+	private int creationDelay = 75;
 
 	public GameLogic() {
-		tick = 0;
+		tick = 50;
 		stage = 1;
 		monsterCount = 0;
 		isOver = false;
@@ -73,7 +81,7 @@ public class GameLogic {
 		for (int i = monsters.size()-1; i >= 0; i--) {
 			Monster m = monsters.get(i);
 			for(int j=0;j<razes.size();j++){
-				if( m.isInSamePosition(razes.get(j))&& !m.isDead())
+				if( m.isRazeHit(razes.get(j))&& !m.isDead())
 					m.hit();
 			}
 			if(!m.isDead() && m.isInSamePosition(player)){
@@ -97,6 +105,5 @@ public class GameLogic {
 		}
 		tick = 0;
 		monsters.add(new Monster());
-		// creationDelay--;
 	}
 }
