@@ -4,8 +4,6 @@ import java.nio.ByteOrder;
 import javax.swing.*;
 import java.lang.Thread;
 public class Main {
-	public static GameLogic logic;
-	public static Runnable game;
 	public static JFrame f;
 	public static NorthPanel north;
 	public static GameScreen screen;
@@ -14,9 +12,14 @@ public class Main {
 		
 		f = new JFrame("Shadow Rage");		
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		f.setLayout(new BorderLayout());	
-		
-		game = new Runnable() {
+		f.setLayout(new BorderLayout());
+		north = new NorthPanel();
+		screen = new GameScreen();
+		f.add(north,BorderLayout.NORTH);
+		f.add(screen,BorderLayout.CENTER);
+		f.pack();
+		f.setVisible(true);
+		/*game = new Runnable() {
 			
 			@Override
 			public void run() {
@@ -47,7 +50,7 @@ public class Main {
 				}
 			}
 		};
-		new Thread(game).start();
+		new Thread(game).start();*/
 		
 	}
 

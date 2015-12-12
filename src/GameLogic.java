@@ -16,7 +16,7 @@ public class GameLogic {
 
 	private static boolean isOver;
 
-	public ArrayList<Monster> getMonsters() {
+	public static ArrayList<Monster> getMonsters() {
 		return monsters;
 	}
 

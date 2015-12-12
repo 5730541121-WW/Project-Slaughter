@@ -117,11 +117,11 @@ public class HighScoreUtility {
 		}
 	}
 
-	public static void displayTop10() {
+	public static int displayTop10() {
 		if (!loadHighScore() || highScoreRecord == null) {
 			// Fill code
 			JOptionPane.showMessageDialog(null, "Error saving high score record", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
+			return 0;
 		}
 		String msg = "======= Top 10 Highest MMR players =======" + System.getProperty("line.separator");
 		int rank = 1;
@@ -129,34 +129,10 @@ public class HighScoreUtility {
 			msg += rank + " " + record.getRecord() + System.getProperty("line.separator");
 			rank++;
 		}
-		/*JButton[] buttons = new JButton[2];
-		buttons[0] = new JButton("restart");
-		buttons[0].addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {	
-				//Thread.currentThread().stop();
-				
-			}
-		});
-		buttons[1] = new JButton("exit");
-		buttons[1].addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);				
-			}
-		});*/
-		
 		int input =JOptionPane.showOptionDialog(null, msg.trim(), "Top 10", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
 		        null, new Object[] {"restart", "exit"}, JOptionPane.YES_OPTION);
-		if(input == JOptionPane.YES_OPTION){
-			
-			new Thread(Main.game).start();
-		}
-		else if( input == JOptionPane.CLOSED_OPTION || input ==JOptionPane.NO_OPTION) {
-			System.exit(0);
-		}
+		return input;
+		
 	}
 
 	private static boolean loadHighScore() {

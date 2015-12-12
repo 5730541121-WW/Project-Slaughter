@@ -8,21 +8,20 @@ import javax.swing.*;
 
 
 public class GameScreen extends JComponent{
-	GameLogic logic = new GameLogic();
-	Background bg = new Background();
-	public GameScreen(GameLogic logic){
+	public static RunThread runt;
+	public static boolean isRestart;
+	public GameScreen(){
+		isRestart = true;
+		startAllThread();
 		setPreferredSize(new Dimension(1400, 500));
-		this.logic = logic;
 		addKeyListener(new KeyAdapter() {
-
 			@Override
-			public void keyReleased(KeyEvent e) {
+			public void keyReleased(KeyEvent e){
 				// TODO Auto-generated method stub
 				InputUtility.setKeyPressed(e.getKeyCode(), false);
 			}
-
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e){
 				// TODO Auto-generated method stub
 				if(InputUtility.getKeyPressed(e.getKeyCode())==false)
 					InputUtility.setKeyTriggered(e.getKeyCode(), true);
@@ -32,15 +31,19 @@ public class GameScreen extends JComponent{
 		});
 		setDoubleBuffered(true);
 	}
+	private static void startAllThread() {
+		// TODO Auto-generated method stub
+		runt = new RunThread(null);
+		runt.start();
+	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		bg.draw(g);
-		logic.getPlayer().draw(g);
-		for( Monster m : logic.getMonsters()){
+		Background.draw(g);
+		GameLogic.getPlayer().draw(g);
+		for( Monster m : GameLogic.getMonsters()){
 			m.draw(g);
 		}
-		
-		for( Raze r : logic.getRazes()){
+		for( Raze r : GameLogic.getRazes()){
 			r.draw(g);
 		}
 		Graphics2D g2 = (Graphics2D) g;
