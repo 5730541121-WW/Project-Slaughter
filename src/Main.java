@@ -19,39 +19,14 @@ public class Main {
 		f.add(screen,BorderLayout.CENTER);
 		f.pack();
 		f.setVisible(true);
-		/*game = new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				logic = new GameLogic();
-				screen = new GameScreen(logic);
-				north = new NorthPanel();
-				f.add(north,BorderLayout.NORTH);
-				f.add(screen,BorderLayout.CENTER);
-				f.pack();
-				f.setVisible(true);
-				
-				while(true){					
-					screen.requestFocus();
-					try {
-						Thread.sleep(50);
-					}catch(InterruptedException e){}
-					if(logic.isOver()){
-						HighScoreUtility.recordHighScore(logic.getPlayer().getScore());
-						HighScoreUtility.displayTop10();
-						System.exit(0);
-					}
-					logic.logicUpdate();
-					f.repaint();
-					north.score.setText("SCORE : "+GameLogic.getPlayer().getScore());
-					north.soul.setText("SOUL : "+GameLogic.getPlayer().getSoulCount());
-					InputUtility.postUpdate();
-				}
-			}
-		};
-		new Thread(game).start();*/
-		
+		int i = JOptionPane.YES_OPTION;
+		while( i == JOptionPane.YES_OPTION){
+			i = RunThread.RunGame();
+			//System.out.println(i);
+			InputUtility.postUpdate();
+			for(int j=0;j<256;j++)InputUtility.setKeyPressed(j, false);
+		}
+		System.exit(0);
 	}
 
 }

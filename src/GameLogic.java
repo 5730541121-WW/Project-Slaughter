@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class GameLogic {
-	private static ArrayList<Monster> monsters = new ArrayList<>();
-	private static ArrayList<Raze> razes = new ArrayList<>();
-	private static Player player = new Player();
+	private static ArrayList<Monster> monsters ;
+	private static ArrayList<Raze> razes ;
+	private static Player player ;
 	private static int tick;
 	private int stage;
 	public static int getTick() {
@@ -45,6 +45,9 @@ public class GameLogic {
 	private int stageTick;
 
 	public GameLogic() {
+		razes = new ArrayList<>();
+		player = new Player();
+		monsters = new ArrayList<>();
 		tick = 50;
 		stage = 1;
 		monsterCount = 0;

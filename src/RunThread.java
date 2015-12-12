@@ -1,18 +1,11 @@
 import javax.swing.JOptionPane;
 
-public class RunThread extends Thread {
-	Thread prevThread;
-	GameLogic logic;
+public class RunThread {
 
-	public RunThread(Thread prevThread) {
-		super();
-		this.prevThread = prevThread;
-		logic = new GameLogic();
-	}
-
-	public void run() {
+	public static int RunGame() {
+		GameLogic logic = new GameLogic();
 		try {
-			if(prevThread!=null)prevThread.join();
+			
 			while (true) {
 				Thread.sleep(50);
 				Main.screen.requestFocus();
@@ -20,13 +13,7 @@ public class RunThread extends Thread {
 					if (logic.isOver()) {
 						HighScoreUtility.recordHighScore(logic.getPlayer().getScore());
 						int input =HighScoreUtility.displayTop10();
-						if(input == JOptionPane.YES_OPTION){
-							Main.screen.isRestart = true;
-							break;
-						}
-						else if( input == JOptionPane.CLOSED_OPTION || input ==JOptionPane.NO_OPTION) {
-							System.exit(0);
-						}
+						return input;
 						//System.exit(0);
 					}
 					logic.logicUpdate();
@@ -38,5 +25,6 @@ public class RunThread extends Thread {
 			}
 		} catch (Exception e) {
 		}
+		return 1;
 	}
 }

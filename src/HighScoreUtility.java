@@ -131,6 +131,7 @@ public class HighScoreUtility {
 		}
 		int input =JOptionPane.showOptionDialog(null, msg.trim(), "Top 10", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
 		        null, new Object[] {"restart", "exit"}, JOptionPane.YES_OPTION);
+		//System.out.println(input);
 		return input;
 		
 	}

@@ -11,9 +11,8 @@ public class GameScreen extends JComponent{
 	public static RunThread runt;
 	public static boolean isRestart;
 	public GameScreen(){
-		isRestart = true;
-		startAllThread();
 		setPreferredSize(new Dimension(1400, 500));
+		Main.f.getContentPane().requestFocus();
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e){
@@ -30,11 +29,6 @@ public class GameScreen extends JComponent{
 			}
 		});
 		setDoubleBuffered(true);
-	}
-	private static void startAllThread() {
-		// TODO Auto-generated method stub
-		runt = new RunThread(null);
-		runt.start();
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
