@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Requiem extends Raze{
 	public Requiem(int distance, int direction) {
@@ -9,7 +10,7 @@ public class Requiem extends Raze{
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.PINK);
-		g2.fillOval(x-35, 365, 70, 70);
+		BufferedImage image = ResourceUtility.getRaze(tickCount);
+		g2.drawImage(image,null, x-50, 230);
 	}
 }

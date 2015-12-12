@@ -16,8 +16,9 @@ public class Raze implements IRenderable{
 	protected int tickCount;
 	protected int x;
 	public Raze(int distance,int direction){
+		
 		this.distance = distance;
-		x = direction*distance + GameLogic.getPlayer().getX();
+		x = direction*distance + GameLogic.getPlayer().getStartingX();
 		tickCount = 0;
 		isVisible = true;
 	}
@@ -25,11 +26,11 @@ public class Raze implements IRenderable{
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		Graphics2D g2 = (Graphics2D) g;
-		BufferedImage image = ResourceUtility.getRaze(tickCount/2);
+		BufferedImage image = ResourceUtility.getRaze(tickCount);
 		g2.drawImage(image,null, x-50, 230);
 	}
 	public void update(){
-		if(tickCount == 5) isVisible = false;
+		if(tickCount == 7) isVisible = false;
 		else {
 			tickCount++;
 		}

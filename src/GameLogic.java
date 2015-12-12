@@ -41,13 +41,16 @@ public class GameLogic {
 	}
 
 	private int monsterCount;
-	private int creationDelay = 75;
+	private int creationDelay = 100;
+	private int stageTick;
 
 	public GameLogic() {
 		tick = 50;
 		stage = 1;
 		monsterCount = 0;
 		isOver = false;
+		stageTick = 0;
+		AudioUtility.playSound("start");
 	}
 
 	public static ArrayList<Raze> getRazes() {
@@ -61,7 +64,7 @@ public class GameLogic {
 	public void logicUpdate() {
 		if (isOver == true) {
 			// player.drawDead();
-			//return;
+			return;
 		}
 		createMonster();
 		
@@ -99,8 +102,16 @@ public class GameLogic {
 	}
 
 	public void createMonster() {
+		if(stageTick == 300) {
+			stageTick = 0;
+			if(creationDelay<60)
+				creationDelay=40;
+			else 
+				creationDelay -=20;
+		}
 		if (tick < creationDelay) {
 			tick++;
+			stageTick++;
 			return;
 		}
 		tick = 0;

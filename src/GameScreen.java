@@ -9,6 +9,7 @@ import javax.swing.*;
 
 public class GameScreen extends JComponent{
 	GameLogic logic = new GameLogic();
+	Background bg = new Background();
 	public GameScreen(GameLogic logic){
 		setPreferredSize(new Dimension(1400, 500));
 		this.logic = logic;
@@ -33,6 +34,7 @@ public class GameScreen extends JComponent{
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		bg.draw(g);
 		logic.getPlayer().draw(g);
 		for( Monster m : logic.getMonsters()){
 			m.draw(g);
@@ -41,5 +43,7 @@ public class GameScreen extends JComponent{
 		for( Raze r : logic.getRazes()){
 			r.draw(g);
 		}
+		Graphics2D g2 = (Graphics2D) g;
+		
 	}
 }
