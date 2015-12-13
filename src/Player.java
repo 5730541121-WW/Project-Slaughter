@@ -16,6 +16,8 @@ public class Player implements IRenderable {
 	private int score;
 	private int razeTick;
 	private boolean isDead, isRazing;
+	private boolean isImmortal;
+	private int immortalTick;
 
 	public boolean isRazing() {
 		return isRazing;
@@ -54,7 +56,7 @@ public class Player implements IRenderable {
 		isDead = false;
 		score = 0;
 		cooldown[0] = cooldown[1] = cooldown[2] = 0;
-		soulCount = 10;
+		soulCount = 0;
 		isRequiemUnleashing = false;
 		RequiemStage = 1;
 		requiemTickCount = 0;
@@ -62,6 +64,8 @@ public class Player implements IRenderable {
 		razeTick = 0;
 		isRequiemStart = false;
 		RequiemDelay = 0;
+		isImmortal = false;
+		immortalTick = 0;
 	}
 
 	public int getSoulCount() {
@@ -126,11 +130,15 @@ public class Player implements IRenderable {
 	}
 
 	public void update() {
+		if(isImmortal){
+			immortalTick--;
+			if(immortalTick == 0) isImmortal = false;
+		}
 		if (isRequiemReady() && InputUtility.getKeyTriggered(KeyEvent.VK_R)) {
 			isRequiemStart = true;
 			soulCount = 0;
 			startingX = x;
-			AudioUtility.playSound("ros");
+			new SoundThread("ros").start();
 			RequiemDelay = 0;
 		} else if (isRequiemStart && !isRequiemUnleashing) {
 			RequiemDelay++;
@@ -156,7 +164,7 @@ public class Player implements IRenderable {
 		{
 			startingX = x;
 			GameLogic.getRazes().add(new Raze(600, direction));
-			AudioUtility.playSound("raze");
+			new SoundThread("raze").start();
 			isRazing = true;
 			razeTick = 7;
 			cooldown[2] = 60;
@@ -165,7 +173,7 @@ public class Player implements IRenderable {
 		{
 			startingX = x;
 			GameLogic.getRazes().add(new Raze(400, direction));
-			AudioUtility.playSound("raze");
+			new SoundThread("raze").start();
 			isRazing = true;
 			razeTick = 7;
 			cooldown[1] = 60;
@@ -174,7 +182,7 @@ public class Player implements IRenderable {
 		{
 			startingX = x;
 			GameLogic.getRazes().add(new Raze(200, direction));
-			AudioUtility.playSound("raze");
+			new SoundThread("raze").start();
 			isRazing = true;
 			razeTick = 7;
 			cooldown[0] = 60;
@@ -202,7 +210,6 @@ public class Player implements IRenderable {
 		{
 			if (cooldown[i] > 0) {
 				cooldown[i] -= 1;
-				// System.out.println(cooldown[i]);
 			}
 		}
 
@@ -272,4 +279,18 @@ public class Player implements IRenderable {
 	public void increaseSoul() {
 		soulCount++;
 	}
+
+	public boolean isImmortal() {
+		return isImmortal;
+	}
+
+	public void setImmortal(boolean isImmortal) {
+		this.isImmortal = isImmortal;
+	}
+
+	public void setImmortalTick(int immortalTick) {
+		this.immortalTick = immortalTick;
+	}
+	
+	
 }

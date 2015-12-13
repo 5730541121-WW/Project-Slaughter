@@ -116,8 +116,21 @@ public class HighScoreUtility {
 			}
 		}
 	}
-
-	public static int displayTop10() {
+	public static void displayTop10() {
+		if (!loadHighScore() || highScoreRecord == null) {
+			// Fill code
+			JOptionPane.showMessageDialog(null, "Error saving high score record", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		String msg = "======= Top 10 Highest MMR players =======" + System.getProperty("line.separator");
+		int rank = 1;
+		for (HighScoreRecord record : highScoreRecord) {
+			msg += rank + " " + record.getRecord() + System.getProperty("line.separator");
+			rank++;
+		}
+		JOptionPane.showMessageDialog(null, msg.trim(), "Top 10", JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+	public static int postMessage() {
 		if (!loadHighScore() || highScoreRecord == null) {
 			// Fill code
 			JOptionPane.showMessageDialog(null, "Error saving high score record", "Error", JOptionPane.ERROR_MESSAGE);
@@ -129,7 +142,7 @@ public class HighScoreUtility {
 			msg += rank + " " + record.getRecord() + System.getProperty("line.separator");
 			rank++;
 		}
-		int input =JOptionPane.showOptionDialog(null, msg.trim(), "Top 10", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+		int input =JOptionPane.showOptionDialog(null, msg.trim(), "Top 10", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, 
 		        null, new Object[] {"restart", "exit"}, JOptionPane.YES_OPTION);
 		//System.out.println(input);
 		return input;

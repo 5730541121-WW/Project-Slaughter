@@ -1,7 +1,7 @@
 
 public class InputUtility {
 	public static int mouseX, mouseY;
-	public static boolean mouseOnScreen = true;
+	public static boolean mouseClick = false;
 	private static boolean keyPressed[] = new boolean[256];
 	private static boolean keyTriggered[] = new boolean[256];
 	public static boolean getKeyPressed(int key) {

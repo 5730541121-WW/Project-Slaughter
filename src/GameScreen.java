@@ -32,6 +32,7 @@ public class GameScreen extends JComponent{
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		//if(!Main.isStart) return ;
 		Background.draw(g);
 		GameLogic.getPlayer().draw(g);
 		for( Monster m : GameLogic.getMonsters()){
@@ -41,6 +42,5 @@ public class GameScreen extends JComponent{
 			r.draw(g);
 		}
 		Graphics2D g2 = (Graphics2D) g;
-		
 	}
 }

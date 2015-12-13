@@ -6,6 +6,36 @@ public class GameLogic {
 	private static Player player ;
 	private static int tick;
 	private int stage;
+	private int monsterCount;
+	private static int creationDelay = 100;
+	private static int stageTick;
+	private static boolean isPause;
+	private static boolean isNyan, isDora;
+	private static int nyanCount,doraCount;
+	public static boolean isNyan() {
+		return isNyan;
+	}
+
+	public static void setNyan(boolean isNyan) {
+		GameLogic.isNyan = isNyan;
+	}
+
+	public static boolean isDora() {
+		return isDora;
+	}
+
+	public static void setDora(boolean isDora) {
+		GameLogic.isDora = isDora;
+	}
+
+	public static boolean isPause() {
+		return isPause;
+	}
+
+	public static void setPause(boolean isPause) {
+		GameLogic.isPause = isPause;
+	}
+
 	public static int getTick() {
 		return tick;
 	}
@@ -39,11 +69,6 @@ public class GameLogic {
 	public static void setOver(boolean isOver) {
 		GameLogic.isOver = isOver;
 	}
-
-	private int monsterCount;
-	private int creationDelay = 100;
-	private int stageTick;
-
 	public GameLogic() {
 		razes = new ArrayList<>();
 		player = new Player();
@@ -53,7 +78,10 @@ public class GameLogic {
 		monsterCount = 0;
 		isOver = false;
 		stageTick = 0;
-		AudioUtility.playSound("start");
+		isDora = false;
+		doraCount = 0;
+		isNyan = false;
+		nyanCount = 0;
 	}
 
 	public static ArrayList<Raze> getRazes() {
@@ -65,7 +93,7 @@ public class GameLogic {
 	}
 
 	public void logicUpdate() {
-		if (isOver == true) {
+		if (isOver == true || isPause) {
 			// player.drawDead();
 			return;
 		}
@@ -91,8 +119,15 @@ public class GameLogic {
 					m.hit();
 			}
 			if(!m.isDead() && m.isInSamePosition(player)){
-				m.setDead(true);
-				player.decreaseLife();
+				if(player.isImmortal()){
+					 player.increaseScore();
+					 player.increaseSoul();
+				}
+				else {
+					new SoundThread("pain").start();
+					player.decreaseLife();
+				}
+				m.setDead(true);				
 			}
 		}	
 		player.update();
@@ -102,6 +137,22 @@ public class GameLogic {
 		for (Raze r : razes) {
 			r.update();
 		}
+	}
+
+	public static int getNyanCount() {
+		return nyanCount;
+	}
+
+	public static void setNyanCount(int nyanCount) {
+		GameLogic.nyanCount = nyanCount;
+	}
+
+	public static int getDoraCount() {
+		return doraCount;
+	}
+
+	public static void setDoraCount(int doraCount) {
+		GameLogic.doraCount = doraCount;
 	}
 
 	public void createMonster() {

@@ -28,6 +28,10 @@ public class ResourceUtility {
 	private static final BufferedImage heart = getImage("res/SF/heart.png");
 	private static final BufferedImage cl = getImage("res/CREEP/creepL.png");
 	private static final BufferedImage cr = getImage("res/CREEP/creepR.png");
+	private static final BufferedImage dl = getImage("res/CREEP/doraL.png");
+	private static final BufferedImage dr = getImage("res/CREEP/doraR.png");
+	private static final BufferedImage nl = getImage("res/CREEP/nyanL.png");
+	private static final BufferedImage nr = getImage("res/CREEP/nyanR.png");
 	private static final BufferedImage zicon = getImage("res/SKILL/Zicon.png");
 	private static final BufferedImage ziconcd = getImage("res/SKILL/Ziconcd.png");
 	private static final BufferedImage xicon = getImage("res/SKILL/Xicon.png");
@@ -38,9 +42,26 @@ public class ResourceUtility {
 	private static final BufferedImage riconcd = getImage("res/SKILL/Riconcd.png");
 	private static final BufferedImage ros = getImage("res/SF/ROS.png");
 	private static final BufferedImage bg = getImage("res/BG/bg.jpg");
+	private static final BufferedImage bg2 = getImage("res/BG/bg2.jpg");
+	private static final BufferedImage doraBg = getImage("res/BG/doraBg.jpg");
+	private static final BufferedImage nyanBg = getImage("res/BG/nyanBg.jpg");
+	public static BufferedImage getBg2() {
+		return bg2;
+	}
+
+	//private static final BufferedImage cr1 = getImage("res/CREEP/creep1.png");
+	//private static final BufferedImage cr2 = getImage("res/CREEP/creep2.png");
+	//private static final BufferedImage cr3 = getImage("res/CREEP/creep3.png");
+	private static final BufferedImage freeze = getImage("res/CREEP/freeze.png");
 	
 	public static BufferedImage getBg() {
 		return bg;
+	}
+	public static BufferedImage getDoraBg() {
+		return doraBg;
+	}
+	public static BufferedImage getNyanBg() {
+		return nyanBg;
 	}
 	public static BufferedImage getROS(int frame) {
 		return ros.getSubimage(frame * 333, 0, 333, 200);
@@ -108,7 +129,11 @@ public class ResourceUtility {
 		return nr2;
 	}
 
-	public static BufferedImage getCreepL(int frame) {
+	public static BufferedImage getCreepL(int type,int frame) {
+		if(type == 3)
+			return dl.getSubimage(frame*120, 0, 120, 120);
+		if(type == 2)
+			return nl.getSubimage(frame*120, 0, 120, 120);
 		return cl.getSubimage(frame * 120, 0, 120, 120);
 	}
 
@@ -116,7 +141,14 @@ public class ResourceUtility {
 		return raze.getSubimage(frame * 100, 0, 100, 220);
 	}
 
-	public static BufferedImage getCreepR(int frame) {
+	public static BufferedImage getCreepR(int type,int frame) {
+		if(type == 3)
+			return dr.getSubimage(frame*120, 0, 120, 120);
+		if(type == 2)
+			return nr.getSubimage(frame*120, 0, 120, 120);
 		return cr.getSubimage(frame * 120, 0, 120, 120);
+	}
+	public static BufferedImage getFreeze() {
+		return freeze;
 	}
 }
