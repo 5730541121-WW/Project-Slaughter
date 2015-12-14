@@ -12,6 +12,9 @@ public class AudioUtility {
 	private static AudioClip acFreeze;
 	private static AudioClip acDeath;
 	private static AudioClip acPain;
+	private static AudioClip title;
+	private static AudioClip bgmusic;
+	
 	static{
 		ClassLoader loader = AudioUtility.class.getClassLoader();
 		acRaze = Applet.newAudioClip(loader.getResource("res/SOUND/Shadowraze.wav"));
@@ -22,6 +25,8 @@ public class AudioUtility {
 		acFreeze = Applet.newAudioClip(loader.getResource("res/SOUND/dora.wav"));
 		acDeath = Applet.newAudioClip(loader.getResource("res/SOUND/death.wav"));
 		acPain = Applet.newAudioClip(loader.getResource("res/SOUND/pain.wav"));
+		title = Applet.newAudioClip(loader.getResource("res/SOUND/title.wav"));
+		bgmusic = Applet.newAudioClip(loader.getResource("res/SOUND/bgmusic.wav"));
 	}
 	
 	public static void playSound(String identifier){
@@ -49,6 +54,22 @@ public class AudioUtility {
 		}
 		else {
 			acStart.play();
-		}
+		}		
+	}
+	
+	public static void playTitle(){		
+		title.loop();		
+	}
+	
+	public static void stopTitle(){
+		title.stop();
+	}
+	
+	public static void playBG(){		
+		bgmusic.loop();		
+	}
+	
+	public static void stopBG(){
+		bgmusic.stop();
 	}
 }

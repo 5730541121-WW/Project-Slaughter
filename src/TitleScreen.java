@@ -16,15 +16,17 @@ public class TitleScreen extends JPanel {
 		//requestFocus();
 		
 		setPreferredSize(new Dimension(1024, 768));
-		setLayout(new FlowLayout());
+		setLayout(new FlowLayout());		
 		JButton start = new JButton("New Game");
 		JButton highscore = new JButton("High Score");
+		AudioUtility.playTitle();
 		start.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				InputUtility.mouseClick = true;
+				AudioUtility.stopTitle();
 			}
 		});
 		highscore.addActionListener(new ActionListener() {
@@ -32,7 +34,7 @@ public class TitleScreen extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				HighScoreUtility.displayTop10();
+				HighScoreUtility.displayTop10();				
 			}
 		});
 		/*

@@ -7,5 +7,6 @@ public class SoundThread extends Thread{
 	}
 	public void run(){
 		AudioUtility.playSound(word);
+		
 	}
 }

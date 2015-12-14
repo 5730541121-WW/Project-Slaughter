@@ -32,6 +32,7 @@ public class ResourceUtility {
 	private static final BufferedImage dr = getImage("res/CREEP/doraR.png");
 	private static final BufferedImage nl = getImage("res/CREEP/nyanL.png");
 	private static final BufferedImage nr = getImage("res/CREEP/nyanR.png");
+	private static final BufferedImage tg = getImage("res/CREEP/tango.png");
 	private static final BufferedImage zicon = getImage("res/SKILL/Zicon.png");
 	private static final BufferedImage ziconcd = getImage("res/SKILL/Ziconcd.png");
 	private static final BufferedImage xicon = getImage("res/SKILL/Xicon.png");
@@ -150,5 +151,9 @@ public class ResourceUtility {
 	}
 	public static BufferedImage getFreeze() {
 		return freeze;
+	}
+	
+	public static BufferedImage getTango() {
+		return tg;
 	}
 }

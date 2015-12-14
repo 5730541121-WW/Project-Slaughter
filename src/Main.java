@@ -12,18 +12,20 @@ public class Main {
 		// TODO Auto-generated method stub
 		GameLogic logic = new GameLogic();
 		f = new JFrame("Shadow Rage");	
+		f.setResizable(false);
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setLayout(new BorderLayout());
 		north = new NorthPanel();
 		screen = new GameScreen();
-		title = new TitleScreen();
+		title = new TitleScreen();		
 		f.add(title);
 		f.pack();
-		f.setVisible(true);
+		f.setVisible(true);		
 		while(!InputUtility.mouseClick){
-			f.requestFocus();
+			title.requestFocus();
 		}
 		f.remove(title);
+		AudioUtility.playBG();
 		f.add(north,BorderLayout.NORTH);
 		f.add(screen,BorderLayout.CENTER);
 		f.validate();

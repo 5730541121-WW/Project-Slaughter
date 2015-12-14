@@ -12,6 +12,7 @@ public class GameScreen extends JComponent{
 	public static boolean isRestart;
 	public GameScreen(){
 		setPreferredSize(new Dimension(1400, 500));
+		
 		Main.f.getContentPane().requestFocus();
 		addKeyListener(new KeyAdapter() {
 			@Override

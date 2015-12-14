@@ -10,7 +10,6 @@ public class RunThread {
 		GameLogic logic = new GameLogic();
 		new SoundThread("start").start();
 		try {
-			
 			while (true) {
 				Thread.sleep(50);
 				if(InputUtility.getKeyTriggered(KeyEvent.VK_ENTER))
@@ -18,6 +17,7 @@ public class RunThread {
 				Main.screen.requestFocus();
 				synchronized (logic) {
 					if (logic.isOver()) {
+						AudioUtility.stopBG();
 						new SoundThread("death").start();
 						HighScoreUtility.recordHighScore(logic.getPlayer().getScore());
 						int input =HighScoreUtility.postMessage();
@@ -29,6 +29,7 @@ public class RunThread {
 						if(logic.getDoraCount()==175){
 							logic.setDora(false);
 							logic.setDoraCount(0);
+							AudioUtility.playBG();
 						}
 						logic.setDoraCount(logic.getDoraCount()+1);
 					}
@@ -36,6 +37,7 @@ public class RunThread {
 						if(logic.getNyanCount()==100){
 							logic.setNyan(false);
 							logic.setNyanCount(0);
+							AudioUtility.playBG();
 						}
 						logic.setNyanCount(logic.getNyanCount()+1);
 					}

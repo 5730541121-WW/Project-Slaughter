@@ -26,9 +26,14 @@ public class Monster implements IRenderable {
 		}
 		y = 335;
 		isDead = false;
-		speed = (int) ((Math.random()) * 5 + 5);
-		isFreeze = false;
-		freezeTick = 0;
+		speed = (int) ((Math.random()) * 5 + 5);		
+		if(GameLogic.isDora()){
+			isFreeze = true;
+			freezeTick = 175 - GameLogic.getDoraCount();
+		}else{
+			isFreeze = false;
+			freezeTick = 0;
+		}
 		type = (int) (Math.random() * 100);
 		// System.out.println(type);
 		if (type % 5 == 0) {
@@ -40,7 +45,7 @@ public class Monster implements IRenderable {
 				type = 3;
 		} else
 			type = 0;
-		type = 2;
+		//type = 3;
 	}
 
 	public int getX() {
@@ -114,16 +119,18 @@ public class Monster implements IRenderable {
 			GameLogic.setDoraCount(0);
 			GameLogic.getPlayer().setImmortal(true);
 			GameLogic.getPlayer().setImmortalTick(100);
+			AudioUtility.stopBG();
 		} else if (type == 3) {
 			GameLogic.setNyan(false);
 			GameLogic.setDora(true);
 			GameLogic.setNyanCount(0);
 			GameLogic.setDoraCount(0);
+			AudioUtility.stopBG();
 			for (Monster m : GameLogic.getMonsters()) {
 				if (m.equals(this))
 					continue;
 				m.setFreeze(true);
-				m.setFreezeTick(160);
+				m.setFreezeTick(175);
 			}
 		}
 		isDead = true;
@@ -138,6 +145,10 @@ public class Monster implements IRenderable {
 		} else {
 			BufferedImage image = ResourceUtility.getCreepR(type,(GameLogic.getTick() % 14) / 2);
 			g2.drawImage(image, null, x - 60, y);
+		}
+		if(type == 1){
+			BufferedImage image = ResourceUtility.getTango();
+			g2.drawImage(image, null, x - 45, y);
 		}
 		if (isFreeze) {
 			BufferedImage image = ResourceUtility.getFreeze();
