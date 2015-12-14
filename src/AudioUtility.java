@@ -1,9 +1,8 @@
 import java.applet.Applet;
 import java.applet.AudioClip;
 
-
 public class AudioUtility {
-		
+
 	private static AudioClip acStart;
 	private static AudioClip acRaze;
 	private static AudioClip acRequiem;
@@ -14,8 +13,8 @@ public class AudioUtility {
 	private static AudioClip acPain;
 	private static AudioClip title;
 	private static AudioClip bgmusic;
-	
-	static{
+
+	static {
 		ClassLoader loader = AudioUtility.class.getClassLoader();
 		acRaze = Applet.newAudioClip(loader.getResource("res/SOUND/Shadowraze.wav"));
 		acStart = Applet.newAudioClip(loader.getResource("res/SOUND/Shadow_Fiend.wav"));
@@ -28,48 +27,41 @@ public class AudioUtility {
 		title = Applet.newAudioClip(loader.getResource("res/SOUND/title.wav"));
 		bgmusic = Applet.newAudioClip(loader.getResource("res/SOUND/bgmusic.wav"));
 	}
-	
-	public static void playSound(String identifier){
+
+	public static void playSound(String identifier) {
 		/* fill code */
-		if( identifier.equalsIgnoreCase("ros") ){
+		if (identifier.equalsIgnoreCase("ros")) {
 			acRequiem.play();
-		}
-		else if(identifier.equalsIgnoreCase("raze")){
+		} else if (identifier.equalsIgnoreCase("raze")) {
 			acRaze.play();
-		}
-		else if(identifier.equalsIgnoreCase("heal")){
+		} else if (identifier.equalsIgnoreCase("heal")) {
 			acHeal.play();
-		}
-		else if(identifier.equalsIgnoreCase("immortal")){
+		} else if (identifier.equalsIgnoreCase("immortal")) {
 			acImmortal.play();
-		}
-		else if(identifier.equalsIgnoreCase("freeze")){
+		} else if (identifier.equalsIgnoreCase("freeze")) {
 			acFreeze.play();
-		}
-		else if(identifier.equalsIgnoreCase("death")){
+		} else if (identifier.equalsIgnoreCase("death")) {
 			acDeath.play();
-		}
-		else if(identifier.equalsIgnoreCase("pain")){
+		} else if (identifier.equalsIgnoreCase("pain")) {
 			acPain.play();
-		}
-		else {
+		} else {
 			acStart.play();
-		}		
+		}
 	}
-	
-	public static void playTitle(){		
-		title.loop();		
+
+	public static void playTitle() {
+		title.loop();
 	}
-	
-	public static void stopTitle(){
+
+	public static void stopTitle() {
 		title.stop();
 	}
-	
-	public static void playBG(){		
-		bgmusic.loop();		
+
+	public static void playBG() {
+		bgmusic.loop();
 	}
-	
-	public static void stopBG(){
+
+	public static void stopBG() {
 		bgmusic.stop();
 	}
 }

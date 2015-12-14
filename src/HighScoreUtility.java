@@ -1,5 +1,4 @@
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -15,8 +14,6 @@ import javax.swing.JOptionPane;
 
 import com.sun.xml.internal.ws.api.Component;
 
-//Fill import
-
 public class HighScoreUtility {
 
 	public static class HighScoreRecord implements Comparable<HighScoreRecord> {
@@ -24,16 +21,11 @@ public class HighScoreUtility {
 		private int score = 0;
 
 		public HighScoreRecord(String name, int score) {
-			// Fill code
 			this.name = name;
 			this.score = score;
 		}
 
-		/*
-		 * Parse the given string "record" record format is name:score
-		 */
 		public HighScoreRecord(String record) throws ScoreParsingException {
-			// Fill code
 			if (record.indexOf(":") == -1) {
 				throw new ScoreParsingException(1);
 			} else {
@@ -52,8 +44,8 @@ public class HighScoreUtility {
 		}
 
 		private static String[] defaultRecord() {
-			return new String[] { "A:800", "B:350", "C:300", "D:250", "E:200", "F:100", "G:40", "H:30", "I:20",
-					"J:10" };
+			return new String[] { "Pun:800", "Bun:350", "Cop:300", "Dog:250", "Teetee:200", "Ja:100", "Krub:40",
+					"Shit:30", "Boy:20", "BossNoob:10" };
 		}
 
 		@Override
@@ -71,12 +63,8 @@ public class HighScoreUtility {
 
 	private static String readFileName = "highscore";
 
-	/*
-	 * Display player's score and record if the player rank is 10 or higher.
-	 */
 	public static void recordHighScore(int score) {
 		if (!loadHighScore() || highScoreRecord == null) {
-			// Fill code
 			JOptionPane.showMessageDialog(null, "Error loading high score record", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -88,23 +76,22 @@ public class HighScoreUtility {
 			}
 		}
 		if (index >= highScoreRecord.length) {
-			// Fill code
-			JOptionPane.showMessageDialog(null, "Game Over\nYour score is " + score,"Game Over ",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Game Over\nYour score is " + score, "Game Over ",
+					JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			for (int i = highScoreRecord.length - 1; i >= index + 1; i--) {
 				highScoreRecord[i] = highScoreRecord[i - 1];
 			}
 			String s = (String) JOptionPane.showInputDialog(null,
-					"Congratulation, you are ranked " + (index + 1) + "\nPlease enter your name", "High Score",JOptionPane.INFORMATION_MESSAGE);
+					"Congratulation, you are ranked " + (index + 1) + "\nPlease enter your name", "High Score",
+					JOptionPane.INFORMATION_MESSAGE);
 			highScoreRecord[index] = new HighScoreRecord(s, score);
-			// Fill code
 			try {
 
 				BufferedWriter out = new BufferedWriter(new FileWriter("highscore"));
-				// Fill code
-				String msg="";
+				String msg = "";
 				for (HighScoreRecord h : highScoreRecord) {
-					msg += h.getRecord()+"\n";
+					msg += h.getRecord() + "\n";
 				}
 				out.write(getXORed(msg));
 				out.close();
@@ -116,9 +103,9 @@ public class HighScoreUtility {
 			}
 		}
 	}
+
 	public static void displayTop10() {
 		if (!loadHighScore() || highScoreRecord == null) {
-			// Fill code
 			JOptionPane.showMessageDialog(null, "Error saving high score record", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		String msg = "======= Top 10 Highest MMR players =======" + System.getProperty("line.separator");
@@ -128,11 +115,11 @@ public class HighScoreUtility {
 			rank++;
 		}
 		JOptionPane.showMessageDialog(null, msg.trim(), "Top 10", JOptionPane.INFORMATION_MESSAGE);
-		
+
 	}
+
 	public static int postMessage() {
 		if (!loadHighScore() || highScoreRecord == null) {
-			// Fill code
 			JOptionPane.showMessageDialog(null, "Error saving high score record", "Error", JOptionPane.ERROR_MESSAGE);
 			return 0;
 		}
@@ -142,22 +129,18 @@ public class HighScoreUtility {
 			msg += rank + " " + record.getRecord() + System.getProperty("line.separator");
 			rank++;
 		}
-		int input =JOptionPane.showOptionDialog(null, msg.trim(), "Top 10", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, 
-		        null, new Object[] {"restart", "exit"}, JOptionPane.YES_OPTION);
-		//System.out.println(input);
+		int input = JOptionPane.showOptionDialog(null, msg.trim(), "Top 10", JOptionPane.YES_NO_OPTION,
+				JOptionPane.INFORMATION_MESSAGE, null, new Object[] { "restart", "exit" }, JOptionPane.YES_OPTION);
 		return input;
-		
+
 	}
 
 	private static boolean loadHighScore() {
 		File f = new File(readFileName);
-		// If no high score, create default
 		if (!f.exists()) {
 			if (!createDefaultScoreFile())
 				return false;
 		}
-		// Read high score -- if fail: delete the file, create default one and
-		// read it again
 		if (!readAndParseScoreFile(f)) {
 			f.delete();
 			if (!createDefaultScoreFile())
@@ -215,10 +198,8 @@ public class HighScoreUtility {
 
 	private static final byte[] key = "RmAAq2b5d8fjgu9dhher".getBytes();
 
-	// This method does both encryption and decryption
 	private static String getXORed(String in) {
 		byte[] inData = in.getBytes();
-		// Fill code
 		for (int i = 0; i < inData.length; i++) {
 			inData[i] = (byte) (inData[i] ^ key[i % (key.length)]);
 		}

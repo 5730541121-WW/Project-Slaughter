@@ -31,7 +31,7 @@ public class Player implements IRenderable {
 	private boolean isRequiemStart;
 	private int startingX;
 	private static int RequiemDelay;
-	
+
 	public static int getRequiemDelay() {
 		return RequiemDelay;
 	}
@@ -130,9 +130,10 @@ public class Player implements IRenderable {
 	}
 
 	public void update() {
-		if(isImmortal){
+		if (isImmortal) {
 			immortalTick--;
-			if(immortalTick == 0) isImmortal = false;
+			if (immortalTick == 0)
+				isImmortal = false;
 		}
 		if (isRequiemReady() && InputUtility.getKeyTriggered(KeyEvent.VK_R)) {
 			isRequiemStart = true;
@@ -149,7 +150,8 @@ public class Player implements IRenderable {
 			}
 		} else if (isRequiemUnleashing) {
 			soulCount = 0;
-			if (requiemTickCount == 2 && (RequiemStage * 50 + startingX <= 1400 || startingX - RequiemStage * 50 >= 0)) {
+			if (requiemTickCount == 2
+					&& (RequiemStage * 50 + startingX <= 1400 || startingX - RequiemStage * 50 >= 0)) {
 				GameLogic.getRazes().add(new Requiem(RequiemStage * 50, 1));
 				GameLogic.getRazes().add(new Requiem(RequiemStage * 50, -1));
 				requiemTickCount = 0;
@@ -186,7 +188,8 @@ public class Player implements IRenderable {
 			isRazing = true;
 			razeTick = 7;
 			cooldown[0] = 60;
-		} if (InputUtility.getKeyPressed(KeyEvent.VK_RIGHT) && !isRazing && RequiemDelay == 0)
+		}
+		if (InputUtility.getKeyPressed(KeyEvent.VK_RIGHT) && !isRazing && RequiemDelay == 0)
 
 		{
 			x += 15;
@@ -226,9 +229,9 @@ public class Player implements IRenderable {
 	@Override
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		if(RequiemDelay>0){
-			BufferedImage image = ResourceUtility.getROS(RequiemDelay/2);
-			g2d.drawImage(image, null, x-140, y);
+		if (RequiemDelay > 0) {
+			BufferedImage image = ResourceUtility.getROS(RequiemDelay / 2);
+			g2d.drawImage(image, null, x - 140, y);
 			return;
 		}
 		if (isRazing) {
@@ -291,6 +294,5 @@ public class Player implements IRenderable {
 	public void setImmortalTick(int immortalTick) {
 		this.immortalTick = immortalTick;
 	}
-	
-	
+
 }

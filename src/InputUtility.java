@@ -1,9 +1,9 @@
 
 public class InputUtility {
-	public static int mouseX, mouseY;
-	public static boolean mouseClick = false;
+	public static boolean mouseClickOnButton = false;
 	private static boolean keyPressed[] = new boolean[256];
 	private static boolean keyTriggered[] = new boolean[256];
+
 	public static boolean getKeyPressed(int key) {
 		if (key < 0 || key >= 256)
 			return false;
@@ -15,15 +15,19 @@ public class InputUtility {
 			return;
 		InputUtility.keyPressed[key] = pressed;
 	}
-	public static void setKeyTriggered(int key, boolean pressed){
+
+	public static void setKeyTriggered(int key, boolean pressed) {
 		if (key < 0 || key >= 256)
 			return;
 		InputUtility.keyTriggered[key] = pressed;
 	}
-	public static boolean getKeyTriggered(int key){
+
+	public static boolean getKeyTriggered(int key) {
 		return InputUtility.keyTriggered[key];
 	}
-	public static void postUpdate(){
-		for(int i =0;i<256;i++) InputUtility.keyTriggered[i] = false;
+
+	public static void postUpdate() {
+		for (int i = 0; i < 256; i++)
+			InputUtility.keyTriggered[i] = false;
 	}
 }

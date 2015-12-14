@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class GameLogic {
-	private static ArrayList<Monster> monsters ;
-	private static ArrayList<Raze> razes ;
-	private static Player player ;
+	private static ArrayList<Monster> monsters;
+	private static ArrayList<Raze> razes;
+	private static Player player;
 	private static int tick;
 	private int stage;
 	private int monsterCount;
@@ -11,7 +11,8 @@ public class GameLogic {
 	private static int stageTick;
 	private static boolean isPause;
 	private static boolean isNyan, isDora;
-	private static int nyanCount,doraCount;
+	private static int nyanCount, doraCount;
+
 	public static boolean isNyan() {
 		return isNyan;
 	}
@@ -69,6 +70,7 @@ public class GameLogic {
 	public static void setOver(boolean isOver) {
 		GameLogic.isOver = isOver;
 	}
+
 	public GameLogic() {
 		razes = new ArrayList<>();
 		player = new Player();
@@ -98,38 +100,37 @@ public class GameLogic {
 			return;
 		}
 		createMonster();
-		
-		for (int i = monsters.size()-1; i >= 0; i--) {
+
+		for (int i = monsters.size() - 1; i >= 0; i--) {
 			Monster m = monsters.get(i);
 			if (m.isDead()) {
 				// m.drawDead();
 				monsters.remove(m);
 			}
-		}		
-		for (int i = razes.size()-1; i >= 0; i--) {
-			//System.out.println(razes.get(i).isVisible());
+		}
+		for (int i = razes.size() - 1; i >= 0; i--) {
+			// System.out.println(razes.get(i).isVisible());
 			if (!razes.get(i).isVisible()) {
 				razes.remove(i);
 			}
 		}
-		for (int i = monsters.size()-1; i >= 0; i--) {
+		for (int i = monsters.size() - 1; i >= 0; i--) {
 			Monster m = monsters.get(i);
-			for(int j=0;j<razes.size();j++){
-				if( m.isRazeHit(razes.get(j))&& !m.isDead())
+			for (int j = 0; j < razes.size(); j++) {
+				if (m.isRazeHit(razes.get(j)) && !m.isDead())
 					m.hit();
 			}
-			if(!m.isDead() && m.isInSamePosition(player)){
-				if(player.isImmortal()){
-					 player.increaseScore();
-					 player.increaseSoul();
-				}
-				else {
+			if (!m.isDead() && m.isInSamePosition(player)) {
+				if (player.isImmortal()) {
+					player.increaseScore();
+					player.increaseSoul();
+				} else {
 					new SoundThread("pain").start();
 					player.decreaseLife();
 				}
-				m.setDead(true);				
+				m.setDead(true);
 			}
-		}	
+		}
 		player.update();
 		for (Monster m : monsters) {
 			m.update();
@@ -156,12 +157,12 @@ public class GameLogic {
 	}
 
 	public void createMonster() {
-		if(stageTick == 300) {
+		if (stageTick == 300) {
 			stageTick = 0;
-			if(creationDelay<60)
-				creationDelay=40;
-			else 
-				creationDelay -=20;
+			if (creationDelay < 60)
+				creationDelay = 40;
+			else
+				creationDelay -= 20;
 		}
 		if (tick < creationDelay) {
 			tick++;

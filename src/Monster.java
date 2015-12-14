@@ -26,11 +26,11 @@ public class Monster implements IRenderable {
 		}
 		y = 335;
 		isDead = false;
-		speed = (int) ((Math.random()) * 5 + 5);		
-		if(GameLogic.isDora()){
+		speed = (int) ((Math.random()) * 5 + 5);
+		if (GameLogic.isDora()) {
 			isFreeze = true;
 			freezeTick = 175 - GameLogic.getDoraCount();
-		}else{
+		} else {
 			isFreeze = false;
 			freezeTick = 0;
 		}
@@ -45,7 +45,7 @@ public class Monster implements IRenderable {
 				type = 3;
 		} else
 			type = 0;
-		//type = 3;
+		// type = 3;
 	}
 
 	public int getX() {
@@ -140,13 +140,13 @@ public class Monster implements IRenderable {
 	public void draw(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		if (direction == 1) {
-			BufferedImage image = ResourceUtility.getCreepL(type,(GameLogic.getTick() % 14) / 2);
+			BufferedImage image = ResourceUtility.getCreepL(type, (GameLogic.getTick() % 14) / 2);
 			g2.drawImage(image, null, x - 60, y);
 		} else {
-			BufferedImage image = ResourceUtility.getCreepR(type,(GameLogic.getTick() % 14) / 2);
+			BufferedImage image = ResourceUtility.getCreepR(type, (GameLogic.getTick() % 14) / 2);
 			g2.drawImage(image, null, x - 60, y);
 		}
-		if(type == 1){
+		if (type == 1) {
 			BufferedImage image = ResourceUtility.getTango();
 			g2.drawImage(image, null, x - 45, y);
 		}
