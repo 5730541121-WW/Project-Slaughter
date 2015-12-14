@@ -8,8 +8,6 @@ import javax.swing.*;
 
 
 public class GameScreen extends JComponent{
-	public static RunThread runt;
-	public static boolean isRestart;
 	public GameScreen(){
 		setPreferredSize(new Dimension(1400, 500));
 		
