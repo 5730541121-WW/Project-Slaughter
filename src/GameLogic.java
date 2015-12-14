@@ -5,13 +5,25 @@ public class GameLogic {
 	private static ArrayList<Raze> razes;
 	private static Player player;
 	private static int tick;
-	private int stage;
-	private int monsterCount;
-	private static int creationDelay = 100;
+	private static int creationDelay;
 	private static int stageTick;
 	private static boolean isPause;
 	private static boolean isNyan, isDora;
 	private static int nyanCount, doraCount;
+	private static boolean isOver;
+	public GameLogic() {
+		razes = new ArrayList<>();
+		player = new Player();
+		monsters = new ArrayList<>();
+		tick = 50;
+		creationDelay = 100;
+		isOver = false;
+		stageTick = 0;
+		isDora = false;
+		doraCount = 0;
+		isNyan = false;
+		nyanCount = 0;
+	}
 
 	public static boolean isNyan() {
 		return isNyan;
@@ -45,8 +57,6 @@ public class GameLogic {
 		GameLogic.tick = tick;
 	}
 
-	private static boolean isOver;
-
 	public static ArrayList<Monster> getMonsters() {
 		return monsters;
 	}
@@ -71,20 +81,7 @@ public class GameLogic {
 		GameLogic.isOver = isOver;
 	}
 
-	public GameLogic() {
-		razes = new ArrayList<>();
-		player = new Player();
-		monsters = new ArrayList<>();
-		tick = 50;
-		stage = 1;
-		monsterCount = 0;
-		isOver = false;
-		stageTick = 0;
-		isDora = false;
-		doraCount = 0;
-		isNyan = false;
-		nyanCount = 0;
-	}
+	
 
 	public static ArrayList<Raze> getRazes() {
 		return razes;

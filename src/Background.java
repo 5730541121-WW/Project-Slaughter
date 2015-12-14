@@ -6,7 +6,6 @@ public class Background {
 	private static BufferedImage image = ResourceUtility.getBg();
 	private static BufferedImage imageDora = ResourceUtility.getDoraBg();
 	private static BufferedImage imageNyan = ResourceUtility.getNyanBg();
-	private int tick;
 
 	public static void draw(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;

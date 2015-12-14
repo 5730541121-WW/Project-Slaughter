@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		GameLogic logic = new GameLogic();
-		f = new JFrame("Shadow Rage");
+		f = new JFrame("Shadow Fiend vs Prog Meth");
 		f.setResizable(false);
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setLayout(new BorderLayout());
