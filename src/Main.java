@@ -22,7 +22,7 @@ public class Main {
 		f.pack();
 		f.setVisible(true);		
 		while(!InputUtility.mouseClick){
-			title.requestFocus();
+			screen.requestFocus();
 		}
 		f.remove(title);
 		AudioUtility.playBG();
