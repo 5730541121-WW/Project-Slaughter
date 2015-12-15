@@ -147,7 +147,7 @@ public class Monster implements IRenderable {
 			g2.drawImage(image, null, x - 60, y);
 		}
 		if (type == 1) {
-			BufferedImage image = ResourceUtility.getTango();
+			BufferedImage image = ResourceUtility.getTg();
 			g2.drawImage(image, null, x - 45, y);
 		}
 		if (isFreeze) {

@@ -9,11 +9,16 @@ public class Player implements IRenderable {
 	private int x, y;
 	private int direction;
 	private int soulCount;
+	
+	private boolean isRequiemStart;
+	private static int RequiemDelay;
 	private boolean isRequiemUnleashing;
+	private int startingX;
 	private int RequiemStage;
 	private int requiemTickCount;
 	private int hp;
 	private int score;
+	private static int[] cooldown = new int[4];
 	private int razeTick;
 	private boolean isDead, isRazing;
 	private boolean isImmortal;
@@ -26,11 +31,6 @@ public class Player implements IRenderable {
 	public void setRazing(boolean isRazing) {
 		this.isRazing = isRazing;
 	}
-
-	private static int[] cooldown = new int[4];
-	private boolean isRequiemStart;
-	private int startingX;
-	private static int RequiemDelay;
 
 	public static int getRequiemDelay() {
 		return RequiemDelay;
@@ -152,8 +152,8 @@ public class Player implements IRenderable {
 			soulCount = 0;
 			if (requiemTickCount == 2
 					&& (RequiemStage * 50 + startingX <= 1400 || startingX - RequiemStage * 50 >= 0)) {
-				GameLogic.getRazes().add(new Requiem(RequiemStage * 50, 1));
-				GameLogic.getRazes().add(new Requiem(RequiemStage * 50, -1));
+				GameLogic.getRazes().add(new Raze(RequiemStage * 50, 1));
+				GameLogic.getRazes().add(new Raze(RequiemStage * 50, -1));
 				requiemTickCount = 0;
 				RequiemStage++;
 			} else if (RequiemStage * 50 + startingX > 1400 && startingX - RequiemStage * 50 < 0) {

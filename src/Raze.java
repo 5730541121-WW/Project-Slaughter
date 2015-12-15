@@ -6,7 +6,8 @@ import java.awt.image.BufferedImage;
 public class Raze implements IRenderable {
 	protected int distance;
 	protected boolean isVisible;
-
+	protected int tickCount;
+	protected int x;
 	public int getX() {
 		return x;
 	}
@@ -14,9 +15,6 @@ public class Raze implements IRenderable {
 	public void setX(int x) {
 		this.x = x;
 	}
-
-	protected int tickCount;
-	protected int x;
 
 	public Raze(int distance, int direction) {
 

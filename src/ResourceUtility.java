@@ -32,7 +32,6 @@ public class ResourceUtility {
 	private static final BufferedImage dr = getImage("res/CREEP/doraR.png");
 	private static final BufferedImage nl = getImage("res/CREEP/nyanL.png");
 	private static final BufferedImage nr = getImage("res/CREEP/nyanR.png");
-	private static final BufferedImage tg = getImage("res/CREEP/tango.png");
 	private static final BufferedImage zicon = getImage("res/SKILL/Zicon.png");
 	private static final BufferedImage ziconcd = getImage("res/SKILL/Ziconcd.png");
 	private static final BufferedImage xicon = getImage("res/SKILL/Xicon.png");
@@ -46,52 +45,51 @@ public class ResourceUtility {
 	private static final BufferedImage bg2 = getImage("res/BG/bg2.jpg");
 	private static final BufferedImage doraBg = getImage("res/BG/doraBg.jpg");
 	private static final BufferedImage nyanBg = getImage("res/BG/nyanBg.jpg");
-
+	private static final BufferedImage hs = getImage("res/button/hs.png");
+	private static final BufferedImage ng = getImage("res/button/ng.png");
+	private static final BufferedImage tg = getImage("res/CREEP/tango.png");
+	public static BufferedImage getTg() {
+		return tg;
+	}
 	public static BufferedImage getBg2() {
 		return bg2;
 	}
-
 	private static final BufferedImage freeze = getImage("res/CREEP/freeze.png");
-
+	
 	public static BufferedImage getBg() {
 		return bg;
 	}
-
 	public static BufferedImage getDoraBg() {
 		return doraBg;
 	}
-
 	public static BufferedImage getNyanBg() {
 		return nyanBg;
 	}
-
 	public static BufferedImage getROS(int frame) {
 		return ros.getSubimage(frame * 333, 0, 333, 200);
 	}
-
 	public static BufferedImage getZicon(int cd) {
-		if (cd == 0)
+		if(cd == 0)
 			return zicon;
 		else
 			return ziconcd;
 	}
-
 	public static BufferedImage getXicon(int cd) {
-		if (cd == 0)
+		if(cd == 0)
 			return xicon;
 		else
 			return xiconcd;
 	}
 
 	public static BufferedImage getCicon(int cd) {
-		if (cd == 0)
+		if(cd == 0)
 			return cicon;
 		else
 			return ciconcd;
 	}
 
 	public static BufferedImage getRicon(int cd) {
-		if (cd == 0)
+		if(cd == 0)
 			return ricon;
 		else
 			return riconcd;
@@ -133,11 +131,11 @@ public class ResourceUtility {
 		return nr2;
 	}
 
-	public static BufferedImage getCreepL(int type, int frame) {
-		if (type == 3)
-			return dl.getSubimage(frame * 120, 0, 120, 120);
-		if (type == 2)
-			return nl.getSubimage(frame * 120, 0, 120, 120);
+	public static BufferedImage getCreepL(int type,int frame) {
+		if(type == 3)
+			return dl.getSubimage(frame*120, 0, 120, 120);
+		if(type == 2)
+			return nl.getSubimage(frame*120, 0, 120, 120);
 		return cl.getSubimage(frame * 120, 0, 120, 120);
 	}
 
@@ -145,19 +143,20 @@ public class ResourceUtility {
 		return raze.getSubimage(frame * 100, 0, 100, 220);
 	}
 
-	public static BufferedImage getCreepR(int type, int frame) {
-		if (type == 3)
-			return dr.getSubimage(frame * 120, 0, 120, 120);
-		if (type == 2)
-			return nr.getSubimage(frame * 120, 0, 120, 120);
+	public static BufferedImage getCreepR(int type,int frame) {
+		if(type == 3)
+			return dr.getSubimage(frame*120, 0, 120, 120);
+		if(type == 2)
+			return nr.getSubimage(frame*120, 0, 120, 120);
 		return cr.getSubimage(frame * 120, 0, 120, 120);
 	}
-
 	public static BufferedImage getFreeze() {
 		return freeze;
 	}
-
-	public static BufferedImage getTango() {
-		return tg;
+	
+	public static BufferedImage button(String s){
+		if(s.equalsIgnoreCase("ng")) return ng;
+		if(s.equalsIgnoreCase("hs")) return hs;
+		else return null;
 	}
 }
