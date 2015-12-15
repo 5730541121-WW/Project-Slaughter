@@ -35,7 +35,6 @@ public class Monster implements IRenderable {
 			freezeTick = 0;
 		}
 		type = (int) (Math.random() * 100);
-		// System.out.println(type);
 		if (type % 5 == 0) {
 			if (GameLogic.getPlayer().getHp() < 3 && type % 2 == 0)
 				type = 1;
@@ -45,7 +44,6 @@ public class Monster implements IRenderable {
 				type = 3;
 		} else
 			type = 0;
-		// type = 3;
 	}
 
 	public int getX() {

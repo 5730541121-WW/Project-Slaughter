@@ -93,7 +93,6 @@ public class GameLogic {
 
 	public void logicUpdate() {
 		if (isOver == true || isPause) {
-			// player.drawDead();
 			return;
 		}
 		createMonster();
@@ -101,12 +100,10 @@ public class GameLogic {
 		for (int i = monsters.size() - 1; i >= 0; i--) {
 			Monster m = monsters.get(i);
 			if (m.isDead()) {
-				// m.drawDead();
 				monsters.remove(m);
 			}
 		}
 		for (int i = razes.size() - 1; i >= 0; i--) {
-			// System.out.println(razes.get(i).isVisible());
 			if (!razes.get(i).isVisible()) {
 				razes.remove(i);
 			}

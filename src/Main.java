@@ -26,6 +26,7 @@ public class Main {
 		while (!InputUtility.mouseClickOnButton) {
 			screen.requestFocus();
 		}
+		AudioUtility.stopTitle();
 		f.remove(title);
 		f.add(north, BorderLayout.NORTH);
 		f.add(screen, BorderLayout.CENTER);

@@ -48,48 +48,57 @@ public class ResourceUtility {
 	private static final BufferedImage hs = getImage("res/button/hs.png");
 	private static final BufferedImage ng = getImage("res/button/ng.png");
 	private static final BufferedImage tg = getImage("res/CREEP/tango.png");
+	private static final BufferedImage freeze = getImage("res/CREEP/freeze.png");
+
 	public static BufferedImage getTg() {
 		return tg;
 	}
+
 	public static BufferedImage getBg2() {
 		return bg2;
 	}
-	private static final BufferedImage freeze = getImage("res/CREEP/freeze.png");
+
 	
+
 	public static BufferedImage getBg() {
 		return bg;
 	}
+
 	public static BufferedImage getDoraBg() {
 		return doraBg;
 	}
+
 	public static BufferedImage getNyanBg() {
 		return nyanBg;
 	}
+
 	public static BufferedImage getROS(int frame) {
 		return ros.getSubimage(frame * 333, 0, 333, 200);
 	}
+
 	public static BufferedImage getZicon(int cd) {
-		if(cd == 0)
+		if (cd == 0)
 			return zicon;
 		else
 			return ziconcd;
 	}
+
 	public static BufferedImage getXicon(int cd) {
-		if(cd == 0)
+		if (cd == 0)
 			return xicon;
 		else
 			return xiconcd;
 	}
 
 	public static BufferedImage getCicon(int cd) {
-		if(cd == 0)
+		if (cd == 0)
 			return cicon;
 		else
 			return ciconcd;
 	}
 
 	public static BufferedImage getRicon(int cd) {
-		if(cd == 0)
+		if (cd == 0)
 			return ricon;
 		else
 			return riconcd;
@@ -131,11 +140,11 @@ public class ResourceUtility {
 		return nr2;
 	}
 
-	public static BufferedImage getCreepL(int type,int frame) {
-		if(type == 3)
-			return dl.getSubimage(frame*120, 0, 120, 120);
-		if(type == 2)
-			return nl.getSubimage(frame*120, 0, 120, 120);
+	public static BufferedImage getCreepL(int type, int frame) {
+		if (type == 3)
+			return dl.getSubimage(frame * 120, 0, 120, 120);
+		if (type == 2)
+			return nl.getSubimage(frame * 120, 0, 120, 120);
 		return cl.getSubimage(frame * 120, 0, 120, 120);
 	}
 
@@ -143,20 +152,24 @@ public class ResourceUtility {
 		return raze.getSubimage(frame * 100, 0, 100, 220);
 	}
 
-	public static BufferedImage getCreepR(int type,int frame) {
-		if(type == 3)
-			return dr.getSubimage(frame*120, 0, 120, 120);
-		if(type == 2)
-			return nr.getSubimage(frame*120, 0, 120, 120);
+	public static BufferedImage getCreepR(int type, int frame) {
+		if (type == 3)
+			return dr.getSubimage(frame * 120, 0, 120, 120);
+		if (type == 2)
+			return nr.getSubimage(frame * 120, 0, 120, 120);
 		return cr.getSubimage(frame * 120, 0, 120, 120);
 	}
+
 	public static BufferedImage getFreeze() {
 		return freeze;
 	}
-	
-	public static BufferedImage button(String s){
-		if(s.equalsIgnoreCase("ng")) return ng;
-		if(s.equalsIgnoreCase("hs")) return hs;
-		else return null;
+
+	public static BufferedImage button(String s) {
+		if (s.equalsIgnoreCase("ng"))
+			return ng;
+		if (s.equalsIgnoreCase("hs"))
+			return hs;
+		else
+			return null;
 	}
 }

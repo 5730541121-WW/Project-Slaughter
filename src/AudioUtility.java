@@ -28,7 +28,7 @@ public class AudioUtility {
 		bgmusic = Applet.newAudioClip(loader.getResource("res/SOUND/bgmusic.wav"));
 	}
 
-	public static void playSound(String identifier) {
+	public static synchronized void playSound(String identifier) {
 		/* fill code */
 		if (identifier.equalsIgnoreCase("ros")) {
 			acRequiem.play();
