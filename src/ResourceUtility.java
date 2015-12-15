@@ -49,6 +49,10 @@ public class ResourceUtility {
 	private static final BufferedImage ng = getImage("res/button/ng.png");
 	private static final BufferedImage tg = getImage("res/CREEP/tango.png");
 	private static final BufferedImage freeze = getImage("res/CREEP/freeze.png");
+	private static final BufferedImage vs = getImage("res/CREEP/visage.png");
+	public static BufferedImage getVisage(int frame) {
+		return vs.getSubimage(frame*120, 0, 120, 120);
+	}
 
 	public static BufferedImage getTg() {
 		return tg;

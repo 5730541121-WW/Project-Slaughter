@@ -40,6 +40,6 @@ public class GameScreen extends JComponent {
 		for (Raze r : GameLogic.getRazes()) {
 			r.draw(g);
 		}
-		Graphics2D g2 = (Graphics2D) g;
+		GameLogic.getVisage().draw(g);
 	}
 }

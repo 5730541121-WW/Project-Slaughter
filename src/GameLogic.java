@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class GameLogic {
@@ -11,9 +12,11 @@ public class GameLogic {
 	private static boolean isNyan, isDora;
 	private static int nyanCount, doraCount;
 	private static boolean isOver;
+	private static Visage visage;
 	public GameLogic() {
 		razes = new ArrayList<>();
 		player = new Player();
+		setVisage(new Visage());
 		monsters = new ArrayList<>();
 		tick = 50;
 		creationDelay = 100;
@@ -165,5 +168,13 @@ public class GameLogic {
 		}
 		tick = 0;
 		monsters.add(new Monster());
+	}
+	public static void setVisage(Visage visage){
+		GameLogic.visage = visage;
+	}
+
+	public static Visage getVisage() {
+		// TODO Auto-generated method stub
+		return visage;
 	}
 }

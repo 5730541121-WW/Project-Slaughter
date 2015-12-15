@@ -8,17 +8,26 @@ public class RunThread {
 
 	public static int RunGame() {
 		GameLogic logic = new GameLogic();
+		RunnableVisage runVisage = new RunnableVisage(GameLogic.getVisage());
+		Thread v = new Thread(runVisage);
+		v.start();
 		AudioUtility.playBG();
 		new SoundThread("start").start();
 		try {
 			while (true) {
 				Thread.sleep(50);
 				if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
+					synchronized (GameLogic.getVisage()) {
+						if(GameLogic.isPause()){
+							GameLogic.getVisage().notifyAll();
+						}
+					}
 					GameLogic.setPause(!GameLogic.isPause());
 					if (GameLogic.isPause())
 						AudioUtility.stopBG();
 					else
 						AudioUtility.playBG();
+					
 				}
 				Main.screen.requestFocus();
 				if (logic.isOver()) {
